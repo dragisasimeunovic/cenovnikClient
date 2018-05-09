@@ -25,4 +25,8 @@ public class StavkaOsiguranjaService {
     public Collection<StavkaOsiguranja> findByKategorija(String kategorija) {
         return stavkaOsiguranjaRepository.findByKategorija(kategorija);
     }
+
+    public void delete(Long id) {
+        stavkaOsiguranjaRepository.delete(id);
+    }
 }

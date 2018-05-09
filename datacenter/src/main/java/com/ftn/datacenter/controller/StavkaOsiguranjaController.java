@@ -28,6 +28,16 @@ public class StavkaOsiguranjaController {
     }
 
     @RequestMapping(
+            value = "/stavka/delete/{id}",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<String> delete(Long id) {
+        stavkaOsiguranjaService.delete(id);
+        return new ResponseEntity<>("USPESNO OBRISANA!", HttpStatus.OK);
+    }
+
+    @RequestMapping(
             value = "/stavka/getAll",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE

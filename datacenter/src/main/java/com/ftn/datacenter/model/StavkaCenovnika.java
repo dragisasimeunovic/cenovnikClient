@@ -1,13 +1,12 @@
 package com.ftn.datacenter.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class StavkaOsiguranja implements Serializable{
+public class StavkaCenovnika implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +16,21 @@ public class StavkaOsiguranja implements Serializable{
 
     private String kategorija;
 
-    public StavkaOsiguranja() {
+    private Double cena;
+
+    @JsonBackReference
+    @ManyToOne
+    private Cenovnik cenovnik;
+
+    public StavkaCenovnika() {
     }
 
-    public StavkaOsiguranja(Long id, String naziv, String kategorija) {
+    public StavkaCenovnika(Long id, String naziv, String kategorija, Double cena, Cenovnik cenovnik) {
         this.id = id;
         this.naziv = naziv;
         this.kategorija = kategorija;
+        this.cena = cena;
+        this.cenovnik = cenovnik;
     }
 
     public Long getId() {
@@ -48,5 +55,21 @@ public class StavkaOsiguranja implements Serializable{
 
     public void setKategorija(String kategorija) {
         this.kategorija = kategorija;
+    }
+
+    public Double getCena() {
+        return cena;
+    }
+
+    public void setCena(Double cena) {
+        this.cena = cena;
+    }
+
+    public Cenovnik getCenovnik() {
+        return cenovnik;
+    }
+
+    public void setCenovnik(Cenovnik cenovnik) {
+        this.cenovnik = cenovnik;
     }
 }

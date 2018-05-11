@@ -41,20 +41,21 @@ public class CenovnikController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Cenovnik> saveStavka(@RequestBody StavkaCenovnika stavka, @PathVariable Long cenovnikId) {
+    public ResponseEntity<StavkaCenovnika> saveStavka(@RequestBody StavkaCenovnika stavka, @PathVariable Long cenovnikId) {
+        stavka.setId(null);
         Cenovnik cenovnik = cenovnikService.findOne(cenovnikId);
         stavka.setCenovnik(cenovnik);
         StavkaCenovnika stavkaCenovnika = stavkaCenovnikaService.save(stavka);
-        return new ResponseEntity<>(cenovnik, HttpStatus.OK);
+        return new ResponseEntity<>(stavkaCenovnika, HttpStatus.OK);
     }
 
     @RequestMapping(
             value = "/cenovnik/aktivan",
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Cenovnik> aktivan() throws ParseException {
-        Cenovnik cenovnik = cenovnikService.getActive(DateService.getFormattedDateUniversal(new Date().toString()));
+        Cenovnik cenovnik = cenovnikService.getActive("20180511");
         return new ResponseEntity<>(cenovnik, HttpStatus.OK);
     }
 

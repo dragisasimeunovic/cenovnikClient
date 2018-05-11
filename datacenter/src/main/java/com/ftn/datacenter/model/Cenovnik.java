@@ -15,7 +15,7 @@ public class Cenovnik implements Serializable {
 
     private String datumPocetka;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "cenovnik", fetch = FetchType.EAGER)
     private Collection<StavkaCenovnika> stavkeCenovnika;
 

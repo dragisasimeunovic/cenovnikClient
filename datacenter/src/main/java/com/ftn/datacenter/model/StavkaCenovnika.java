@@ -1,11 +1,13 @@
 package com.ftn.datacenter.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table
 public class StavkaCenovnika implements Serializable {
 
     @Id
@@ -18,7 +20,6 @@ public class StavkaCenovnika implements Serializable {
 
     private Double cena;
 
-    @JsonBackReference
     @ManyToOne
     private Cenovnik cenovnik;
 
@@ -65,6 +66,7 @@ public class StavkaCenovnika implements Serializable {
         this.cena = cena;
     }
 
+    @JsonIgnore
     public Cenovnik getCenovnik() {
         return cenovnik;
     }
